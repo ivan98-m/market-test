@@ -72,4 +72,38 @@ const useNFTsByOwner = ({contractPolygon, account}) => {
 	};
 }
 
-export {useNFTsCollection, useNFTsByOwner};
+const useOwnerForToken = ({addressContract, tokenId}) => {
+	const [tokenIdOwner, setTokenIdOwner] = useState([]);
+	const [loadingTokenIdOwner, setLoadingTokenIdOwner] = useState(true);
+
+	const getOwnerNftContrac = async (addressContract, tokenId) => {
+		setLoadingTokenIdOwner(true);
+		//const contractPolygon = "0xfE8c6a26243B0f1533cEEA3368DC73A5AA6899b5";
+		//fetch('https://polygon-mumbai.g.alchemy.com/nft/v2/demo/getOwnersForToken?contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330&tokenId=44', options)
+		const url = `${apiAlchemy}/getOwnersForToken?contractAddress=${addressContract}&tokenId=${tokenId}`;
+		const options = { method: "GET", headers: { Accept: "application/json" } };
+
+		fetch(url, options)
+			.then((response) => response.json())
+			.then((response) => {
+				setTokenIdOwner(response.owners[0]);
+				//console.log(response.ownedNfts);
+				setLoadingTokenIdOwner(false);
+			})
+			.catch((err) => {
+				console.error(err);
+				setLoadingTokenIdOwner(false);
+			});
+	};
+
+	useEffect(() => {
+		getOwnerNftContrac(addressContract, tokenId);
+	}, [addressContract, tokenId]);
+
+	return{
+	tokenIdOwner,
+	loadingTokenIdOwner
+	};
+}
+
+export {useNFTsCollection, useNFTsByOwner, useOwnerForToken};

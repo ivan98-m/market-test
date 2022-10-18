@@ -1,33 +1,22 @@
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useWeb3React } from "@web3-react/core";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import useNFTMarket from "../hooks/useNFTMarket";
 
-const Comprar = ({ contract}) => {
-  const [unSold, setUnSold] = useState([]);
+const Comprar = ({ dataSale }) => {
+  
+	const {account} = useWeb3React();
   const market = useNFTMarket();
-	const {account} = useWeb3React()
 
-  const getUnsoldItems = useCallback(async () => {
-    if (market) {
-      const result = await market.methods.getUnsoldItems().call().then();
-      console.log(result[0].seller);
-      setUnSold(result)
-    }
-  }, [market]);
+  
+  const comprar = async (nftContract, itemId, price) => {
+    //console.log(`nft contract: ${nftContract} - itemId: ${itemId} consto: ${price} `);
 
-  useEffect(() => {
-    getUnsoldItems();
-  }, [getUnsoldItems]);
-
-  const comprar = async () => {
-    console.log("comprar");
-
-		market.methods.sellItemAndTransferOwnership(contract, 3)
+		market.methods.sellItemAndTransferOwnership(nftContract, itemId)
     .send({
 			from: account,
-      gas: 1000000,
-			value: 5000000000000000,
+      //gas: 1000000,
+			value: price,
 		})
     .on("transactionHash", (txHash) => {
       alert(`Transacción enviada txHash: ${txHash}`);
@@ -38,22 +27,28 @@ const Comprar = ({ contract}) => {
     .on("error", (error) => {
       alert(`Transacción Fallida`);
     });
+    
   };
 
   return (
-    <Box>
-      {console.log(unSold)}
-      <p>{account}</p>
-      {unSold && unSold.map((atributo) => (
-        <p
-          key={atributo.itemId}
-        >{`Item Nº: ${atributo.itemId} tokenId: ${atributo.tokenId}`}</p>
-      ))}
-
-      <Button variant="contained" onClick={comprar}>
+    <>
+      {/* {console.log(unSold)} */}
+      {dataSale.isSold ? (
+        <Button 
+        variant="contained" 
+        color="success"
+        onClick={() => {comprar(dataSale.nftContract, dataSale.itemId, dataSale.price)}}
+        >
         Comprar
-      </Button>
-    </Box>
+        </Button>
+      ):(
+        <Button disabled>
+        Comprar
+        </Button>
+      )
+
+      }
+    </>
   );
 };
 

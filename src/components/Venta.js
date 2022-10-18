@@ -13,7 +13,7 @@ import useNFTMarket from "../hooks/useNFTMarket";
 import { useWeb3React } from "@web3-react/core";
 
 
-function Venta({address, tokenId}) {
+function Venta({addressContract, tokenId, tokenIdOwner}) {
 
   const {account} = useWeb3React()
 
@@ -36,10 +36,10 @@ function Venta({address, tokenId}) {
 
     console.log(market.methods)
     //PRICE 5000000000000000
-    market.methods.addItemToMarket(address, tokenId, tokenSell.precio)
+    market.methods.addItemToMarket(addressContract, tokenId, tokenSell.precio)
     .send({
       from:account,
-      gas: 1000000,
+      //gas: 1000000,
     })
     .on("transactionHash", (txHash) => {
       alert(`Transacción enviada txHash: ${txHash}`);
@@ -51,20 +51,12 @@ function Venta({address, tokenId}) {
       alert(`Transacción Fallida`);
     });
 
-    // result.then(response => {
-    //   console.log(response);
-    //   console.log('item add')
-    // })
-    // .catch(err => {
-    //   console.log("Error occured while adding a new item");
-    // });
-
-
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h3>Anunciar artículo para la venta</h3>
+      {/* {console.log(account.toLowerCase() === tokenIdOwner? 'es dueño' : 'no es dueño')} */}
       <Box sx={{ minWidth: 120 }} mt={2} mb={2}>
         <Grid container spacing={1}>
           <Grid item xs={4}>
@@ -98,14 +90,18 @@ function Venta({address, tokenId}) {
         </Grid>
       </Box>
       <FormControl fullWidth>
-        {tokenSell.precio === "" ? (
-          <Button variant="outlined" disabled>
-            Vender
-          </Button>
-        ) : (
-          <Button type="submit" variant="contained">
-            Vender
-          </Button>
+        {account.toLowerCase() === tokenIdOwner ? (
+          tokenSell.precio === "" ? (
+            <Button variant="outlined" disabled>
+              Vender
+            </Button>
+          ) : (
+            <Button type="submit" variant="contained">
+              Vender
+            </Button>
+          )
+        ):(
+          console.log('no es dueño')
         )}
       </FormControl>
     </form>

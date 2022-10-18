@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import Coleccion from './Coleccion';
 import { useNFTsByOwner, useNFTsCollection } from '../hooks/useNfTData';
 import { CircularProgress } from '@mui/material';
-import Comprar from './Comprar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -87,7 +86,8 @@ export default function BasicTabs({ account }) {
             )}
         </TabPanel>
         <TabPanel value={value} index={2}>
-            <Comprar contract={contractPolygon} account={account}/>
+            <p>Compre</p>
+
         </TabPanel>
         </Box>
     </>

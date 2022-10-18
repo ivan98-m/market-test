@@ -49,15 +49,28 @@ const Coleccion = ({ nfts, owner = false }) => {
 
   const nftsUnSold = nftfilter.map((nft) => {
     let sellerOwner = '', itemMarket = '', valor = '';
+    let addContract = '', estado = true;
     let id = tokenId(nft.id.tokenId);
     unSold.forEach(element => {
       if (element.tokenId === id) {
         sellerOwner = element.seller;
         itemMarket = element.itemId;
         valor = element.price;
+        estado = element.isSold;
+        addContract = element.nftContract;
       }
     })
-    return ({ ...nft, tokenId: id, dataSale: { owner: sellerOwner, itemId: itemMarket, price: valor } })
+    return ({ 
+      ...nft, 
+      tokenId: id, 
+      dataSale: { 
+        nftContract: addContract,
+        owner: sellerOwner, 
+        itemId: itemMarket, 
+        price: valor, 
+        isSold: estado 
+      } 
+    })
   })
 
   return (

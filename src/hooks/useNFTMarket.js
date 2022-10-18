@@ -3,8 +3,9 @@ import { useWeb3React } from "@web3-react/core";
 import NFTMarketArtifacts from "../config/artifacts/NFTMarket";
 
 
-//addres contract : 0x42943e63e4eF7e672f022227369524aA38C33203
+//address market sin cambiar estado : 0x42943e63e4eF7e672f022227369524aA38C33203
 // hook para uso de nuestro contrato inteligente 
+//address cambio de estado(venta) no tranfiere el token al market : 0xF36D7ea7DB0918755a2a5342A7BFC3456DE80f64
 const { address, abi } = NFTMarketArtifacts; // sacamos de artifacts el address y el abi
 const useNFTMarket =()=>{
     const {active, library, chainId}=useWeb3React();
