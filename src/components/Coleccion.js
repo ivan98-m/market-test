@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import CartNft from "./CartNft";
-import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import useNFTMarket from "../hooks/useNFTMarket";
 //const dotenv = require('dotenv').config()
@@ -21,10 +20,16 @@ const Coleccion = ({ nfts, owner = false }) => {
   const [unSold, setUnSold] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+  const contractAddress = nfts[0].contract.address;
+  //const contractPolygon = "0xfE8c6a26243B0f1533cEEA3368DC73A5AA6899b5";
+
   const getUnsoldItems = useCallback(async () => {
     setLoading(true);
     if (market) {
-      const result = await market.methods.getUnsoldItems().call().then();
+      //const result = await market.methods.getUnsoldItems().call().then();
+      console.log(market.methods)
+      const result = await market.methods.getUnSoldForContract(contractAddress).call().then();
       console.log(result);
       setUnSold(result);
       setLoading(false)

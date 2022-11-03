@@ -11,7 +11,6 @@ const Comprar = ({ dataSale }) => {
   
   const comprar = async (nftContract, itemId, price) => {
     //console.log(`nft contract: ${nftContract} - itemId: ${itemId} consto: ${price} `);
-
 		market.methods.sellItemAndTransferOwnership(nftContract, itemId)
     .send({
 			from: account,

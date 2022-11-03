@@ -32,7 +32,7 @@ const CartNft = ({ nft, owner }) => {
 
   //convierte el precio de wei a eters en este caso matic
   const price = Web3.utils.fromWei(nft.dataSale.price, "ether");
-  const contrario = Web3.utils.toWei("0.005", "ether");
+  //const contrario = Web3.utils.toWei("0.005", "ether");
 
   return (
     <Grid item xs={3} sm={4} md={4}>
