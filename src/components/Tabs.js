@@ -48,7 +48,7 @@ export default function BasicTabs({ account }) {
     setValue(newValue);
   };
 
-  const contractPolygon = "0xfE8c6a26243B0f1533cEEA3368DC73A5AA6899b5";
+  const contractPolygon = "0xfe8c6a26243b0f1533ceea3368dc73a5aa6899b5";
  
   const { nfts, loadingNftsC } = useNFTsCollection(contractPolygon);
 	const { nftsAccount, loadingNftsO } = useNFTsByOwner({contractPolygon, account});
@@ -56,6 +56,7 @@ export default function BasicTabs({ account }) {
   return (
     <>
         <div>Direcion de cuenta</div>
+        {console.log(nftsAccount)}
         <p>{account}</p>
         <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -76,13 +77,17 @@ export default function BasicTabs({ account }) {
             )}
         </TabPanel>
         <TabPanel value={value} index={1}>
-            {loadingNftsO  ? (
+            {loadingNftsO ? (
                 <Box display="flex" justifyContent="center">
                  <CircularProgress />
                </Box>
 
             ):(
+              nftsAccount.length > 0 ? (
                 <Coleccion nfts={nftsAccount} owner={true}/>
+              ):(
+                ''
+              )
             )}
         </TabPanel>
         <TabPanel value={value} index={2}>

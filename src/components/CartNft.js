@@ -36,7 +36,6 @@ const CartNft = ({ nft, owner }) => {
 
   return (
     <Grid item xs={3} sm={4} md={4}>
-      {/* {console.log( nft.dataSale.isSold)} */}
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea
           component={Link}

@@ -8,6 +8,7 @@ const Comprar = ({ dataSale }) => {
 	const {account} = useWeb3React();
   const market = useNFTMarket();
 
+  const fecha = new Date();
   
   const comprar = async (nftContract, itemId, price) => {
     //console.log(`nft contract: ${nftContract} - itemId: ${itemId} consto: ${price} `);

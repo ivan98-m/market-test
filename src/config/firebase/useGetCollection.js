@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 const useGetCollection = (id) => {
 
-    const [colArtifacts, setColArtifacts] = useState();
+    const [colArtifacts, setColArtifacts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const getABI = async(id) => {

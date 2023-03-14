@@ -5,21 +5,23 @@ import { useEffect, useState } from "react";
 // 	useWeb3React();
 const apiAlchemy = process.env.REACT_APP_ALCHEMY_KEY_MUMBAI;
 //const contractPolygon = "0xfE8c6a26243B0f1533cEEA3368DC73A5AA6899b5";
+const apiAlchemyV2 = "https://polygon-mumbai.g.alchemy.com/nft/v2/G7ZcLQLZ9dwT7ZPKSPPNLsPdraGBN2Iq/getNFTsForCollection?contractAddress=0xfe8c6a26243b0f1533ceea3368dc73a5aa6899b5&withMetadata=true";
 
 const useNFTsCollection = (contractPolygon) => {
 	const [nfts, setNfts] = useState([]);
 	const [loadingNftsC, setLoadingNftsC] = useState(true);
 
-	const getContractMetadata = async () => {
+	const getContractMetadata = (contractPolygon) => {
 		setLoadingNftsC(true);
 		const url = `${apiAlchemy}/getNFTsForCollection?contractAddress=${contractPolygon}&withMetadata=true`;
+		//const url = apiAlchemyV2;
 		const options = { method: "GET", headers: { accept: "application/json" } };
 
 		fetch(url, options)
 			.then((response) => response.json())
 			.then((response) => {
 				setNfts(response.nfts);
-				//console.log(response.nfts);
+				//console.log(response);
 				setLoadingNftsC(false);
 			})
 			.catch((err) => {
@@ -29,8 +31,8 @@ const useNFTsCollection = (contractPolygon) => {
 	};
 
 	useEffect(() => {
-		getContractMetadata();
-	}, []);
+		getContractMetadata(contractPolygon);
+	}, [contractPolygon]);
 
 	return{
 		nfts,

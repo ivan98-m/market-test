@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useWeb3React } from "@web3-react/core";
 import NFTMarketArtifacts from "../config/artifacts/NFTMarket";
 

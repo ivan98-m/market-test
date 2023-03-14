@@ -28,9 +28,9 @@ const Coleccion = ({ nfts, owner = false }) => {
     setLoading(true);
     if (market) {
       //const result = await market.methods.getUnsoldItems().call().then();
-      console.log(market.methods)
+      //console.log(market.methods)
       const result = await market.methods.getUnSoldForContract(contractAddress).call().then();
-      console.log(result);
+      //console.log(result);
       setUnSold(result);
       setLoading(false)
     }
@@ -56,6 +56,8 @@ const Coleccion = ({ nfts, owner = false }) => {
     let sellerOwner = '', itemMarket = '', valor = '';
     let addContract = '', estado = true;
     let id = tokenId(nft.id.tokenId);
+    let addC = nft.contract.address.toLowerCase();
+    
     unSold.forEach(element => {
       if (element.tokenId === id) {
         sellerOwner = element.seller;
@@ -66,7 +68,8 @@ const Coleccion = ({ nfts, owner = false }) => {
       }
     })
     return ({ 
-      ...nft, 
+      ...nft,
+      contract: {address: addC },
       tokenId: id, 
       dataSale: { 
         nftContract: addContract,
@@ -80,7 +83,7 @@ const Coleccion = ({ nfts, owner = false }) => {
 
   return (
     <>
-      {console.log(nftsUnSold)}
+      {/* {console.log(nftsUnSold)} */}
       <Container fixed>
         <Grid
           container
@@ -96,7 +99,7 @@ const Coleccion = ({ nfts, owner = false }) => {
                 owner={owner}
               />
             )) : (
-              console.log('no')
+              console.log('...cargando')
             )}
         </Grid>
       </Container>
