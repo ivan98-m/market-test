@@ -7,6 +7,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 14.18.0 (Currently using 64-bit executable)
 
+### config-overrides.js 
+
+se usa este archivo de configuracion porque las librerias utilizadas para conectar con web3, blokchain usan webpack 4 y react > 16 usa webpack 5
+
 ## Available Scripts
 
 In the project directory, you can run:
