@@ -9,7 +9,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### config-overrides.js 
 
-se usa este archivo de configuracion porque las librerias utilizadas para conectar con web3, blokchain usan webpack 4 y react > 16 usa webpack 5
+se usa este archivo de configuracion porque las librerias utilizadas para conectar con web3, blokchain usan webpack 4 y react > 16 usa webpack 5,
+para mas informacion: (https://docs.x.immutable.com/docs/create-react-app-webpack-5-errors/)
 
 ## Available Scripts
 
