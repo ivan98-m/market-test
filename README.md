@@ -1,6 +1,11 @@
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Node version para librerias web3 js 
+
+14.18.0 (Currently using 64-bit executable)
 
 ## Available Scripts
 
