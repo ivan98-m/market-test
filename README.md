@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Node version para librerias web3 js 
 
-14.18.0 (Currently using 64-bit executable)
+14.18.0 (Currently using 64-bit executable) ...
 
 ### config-overrides.js 
 
